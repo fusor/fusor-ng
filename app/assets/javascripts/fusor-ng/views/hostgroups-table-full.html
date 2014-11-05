@@ -1,0 +1,20 @@
+<table class="table table-striped" ng-class="{'table-mask': hostgroupTable.working}">
+  <thead>
+    <tr alch-table-head row-select>
+      <th alch-table-column="name" sortable>{{ "Name" | translate }}</th>
+      <th alch-table-column="name" sortable>{{ "Title" | translate }}</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr alch-table-row ng-repeat="hostgroup in hostgroupTable.rows" row-select="hostgroup">
+      <td alch-table-cell>
+        <a ui-sref="hostgroups.details.info({hostgroupId: hostgroup.id})">
+          {{ hostgroup.name }}
+        </a>
+        <i class="icon-chevron-right selected-icon" ng-show="hostgroup.selected"></i>
+      </td>
+      <td alch-table-cell>{{ hostgroup.title }}</td>
+    </tr>
+  </tbody>
+</table>

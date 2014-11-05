@@ -1,0 +1,27 @@
+<span page-title ng-model="hostgroup">{{ 'Hostgroup information for:' | translate }} {{ hostgroup.name }}</span>
+<div alch-alert success-messages="successMessages" error-messages="errorMessages"></div>
+
+<div class="details fl">
+  <section>
+    <h4 translate>Basic Information</h4>
+
+    <div class="detail">
+      <span class="info-label" translate>Name</span>
+      <span class="info-value"
+            alch-edit-text="hostgroup.name"
+            on-save="save(hostgroup)"
+            readonly="hostgroup.readonly">
+      </span>
+    </div>
+
+    <div class="detail">
+      <span class="info-label" translate>Description</span>
+      <span class="info-value"
+            alch-edit-textarea="hostgroup.description"
+            on-save="save(hostgroup)"
+            readonly="hostgroup.readonly">
+      </span>
+    </div>
+
+  </section>
+</div>

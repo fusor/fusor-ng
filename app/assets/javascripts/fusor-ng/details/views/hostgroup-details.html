@@ -1,0 +1,80 @@
+<span page-title ng-model="hostgroup">{{ 'Details for Hostgroup:' | translate }} {{ hostgroup.name }}</span>
+
+<div class="loading-mask loading-mask-panel" ng-show="panel.loading">
+  <i class="icon-spinner icon-spin"></i>
+  {{ "Loading..." | translate }}
+</div>
+
+<section class="nutupane-details" ng-cloak alch-container-scroll>
+
+  <header class="details-header">
+    <h2 class="fl" translate>Hostgroup: {{ hostgroup.name }}</h2>
+
+    <div class="fr">
+
+      <div alch-modal="removeHostgroup(hostgroup)" model="hostgroup"
+           modal-header='Remove Hostgroup "{{hostgroup.name}}"?'
+           modal-body='Are you sure you want to remove hostgroup "{{ hostgroup.name }}"?'></div>
+
+      <i class="icon-question-sign" ng-show="!hostgroup.permissions.deletable"
+         tooltip="{{ 'You cannot remove this hostgroup because you do not have permission.' | translate }}"
+         tooltip-append-to-body="true">
+      </i>
+      <button class="btn"
+              ng-class="{'btn-danger': hostgroup.permissions.deletable, 'btn-default': !hostgroup.permissions.deletable}"
+              ng-hide="hostgroup.readonly"
+              ng-click="openModal()"
+              ng-disabled="!hostgroup.permissions.deletable">
+        <i class="icon-trash"></i>
+        {{ "Remove Hostgroup" | translate }}
+      </button>
+      <button class="btn btn-default" ui-sref="hostgroups.index">
+        <i class="icon-remove"></i>
+        {{ "Close" | translate }}
+      </button>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="nav nav-tabs">
+      <li ng-class="{active: stateIncludes('hostgroups.details.info')}">
+        <a translate
+           ui-sref="hostgroups.details.info({hostgroupId: hostgroup.id})">
+          Details
+        </a>
+      </li>
+      <li ng-class="{active: stateIncludes('hostgroups.details.permissions')}">
+        <a translate
+           ui-sref="hostgroups.details.permissions.index({hostgroupId: hostgroup.id})">
+          Permissions
+        </a>
+      </li>
+      <li ng-class="{active: stateIncludes('hostgroups.details.users')}">
+        <a translate
+           ui-sref="hostgroups.details.users.list({hostgroupId: hostgroup.id})">
+          Users
+        </a>
+      </li>
+      <li ng-class="{active: stateIncludes('hostgroups.details.user-groups')}">
+        <a translate
+           ui-sref="hostgroups.details.user-groups.list({hostgroupId: hostgroup.id})">
+          User Groups
+        </a>
+      </li>
+      <li ng-class="{active: stateIncludes('hostgroups.details.organizations')}">
+        <a translate
+           ui-sref="hostgroups.details.organizations.list({hostgroupId: hostgroup.id})">
+          Organizations
+        </a>
+      </li>
+      <li ng-class="{active: stateIncludes('hostgroups.details.locations')}">
+        <a translate
+           ui-sref="hostgroups.details.locations.list({hostgroupId: hostgroup.id})">
+          Locations
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="nutupane-sub-section" ui-view></section>
+</section>
